@@ -1,0 +1,125 @@
+{
+  "hosting": {
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
+    "predeploy": ["npm run build"],
+    "headers": [
+      {
+        "source": "**/*.@(js|css)",
+        "headers": [{ "key": "Cache-Control", "value": "public,max-age=31536000,immutable" }]
+      },
+      {
+        "source": "index.html",
+        "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/scenario",
+        "function": { "functionId": "aiScenario", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/assessment",
+        "function": { "functionId": "aiAssessment", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/evaluate",
+        "function": { "functionId": "aiEvaluate", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/teaching-strategy",
+        "function": { "functionId": "aiTeachingStrategy", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/leaderboard",
+        "function": { "functionId": "courseLeaderboard", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/analyze",
+        "function": { "functionId": "analyzeSubmission", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/similarity",
+        "function": { "functionId": "similarityCheck", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/export-user-data",
+        "function": { "functionId": "exportUserData", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/request-delete",
+        "function": { "functionId": "requestDeleteAccount", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/user-portal",
+        "function": { "functionId": "userPortalSummary", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/parental-consent",
+        "function": { "functionId": "submitParentalConsent", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/dpia",
+        "function": { "functionId": "createDPIARecord", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/dpia-list",
+        "function": { "functionId": "listDPIARecords", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/dpia-update",
+        "function": { "functionId": "updateDPIARecord", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/dpia-delete",
+        "function": { "functionId": "deleteDPIARecord", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/dpia-all",
+        "function": { "functionId": "listAllDPIARecords", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/admins",
+        "function": { "functionId": "listAdmins", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/admins-add",
+        "function": { "functionId": "addAdmin", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/admins-remove",
+        "function": { "functionId": "removeAdmin", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/delete-requests",
+        "function": { "functionId": "listDeleteRequests", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/delete-requests-act",
+        "function": { "functionId": "actOnDeleteRequest", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/audit-logs",
+        "function": { "functionId": "listAuditLogs", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/export-status",
+        "function": { "functionId": "userExportsSummary", "region": "asia-southeast1" }
+      },
+      {
+        "source": "/api/deletion-funnel",
+        "function": { "functionId": "deletionFunnelSummary", "region": "asia-southeast1" }
+      },
+      { "source": "**", "destination": "/index.html" }
+    ]
+  },
+  "functions": { "source": "functions", "runtime": "nodejs20" },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "storage": {
+    "rules": "storage.rules"
+  }
+}

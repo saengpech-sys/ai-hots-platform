@@ -1,0 +1,46 @@
+{
+  "name": "ai-hots-frontend",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/write-version.mjs",
+    "build:clean": "vite build && node scripts/write-version.mjs && node scripts/cleanup-assets.mjs --keep=3",
+    "deploy:hosting": "vite build && firebase deploy --only hosting",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "clean:assets": "node scripts/cleanup-assets.mjs --keep=3",
+    "clean:assets:dry": "node scripts/cleanup-assets.mjs --keep=3 --dry",
+    "test": "vitest run",
+    "audit:ci": "npm audit --production",
+    "tailwind:init": "npx tailwindcss init -p"
+  },
+  "dependencies": {
+    "@tailwindcss/typography": "^0.5.10",
+    "firebase": "^10.13.1",
+    "jspdf": "^3.0.2",
+    "jspdf-autotable": "^5.0.2",
+    "pinia": "^2.1.7",
+    "uplot": "^1.6.30",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.3.3",
+    "@vitejs/plugin-vue": "^5.0.5",
+    "@types/node": "^20.12.12",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^8.49.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "postcss": "^8.4.38",
+    "prettier": "^3.0.3",
+    "rollup-plugin-visualizer": "^6.0.3",
+    "tailwindcss": "^3.4.1",
+    "vite": "^7.1.4",
+    "vite-plugin-compression": "^0.5.1",
+    "vite-plugin-vue-devtools": "^7.2.1",
+    "vitest": "^3.2.4"
+  }
+}

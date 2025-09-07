@@ -1,0 +1,33 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  push:
+    branches: [PythonProjects]
+  pull_request:
+    branches: [PythonProjects]
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install deps
+        run: npm ci
+      - name: Production audit
+        run: npm audit --production --json > audit-report.json || true
+      - name: Fail on high/critical
+        run: |
+          node -e "const fs=require('fs');const d=JSON.parse(fs.readFileSync('audit-report.json','utf8'));const sev=d.metadata?.vulnerabilities||{};if((sev.high||0)>0||(sev.critical||0)>0){console.error('High/Critical vulns found');process.exit(1)}"
+      - name: Upload audit artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-report
+          path: audit-report.json

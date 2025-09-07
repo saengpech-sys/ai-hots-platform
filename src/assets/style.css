@@ -1,0 +1,33 @@
+/* stylelint-disable at-rule-no-unknown */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
+
+@layer components {
+  .input-style {
+    @apply px-4 py-2 border border-slate-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500;
+  }
+}
+
+@layer base {
+
+  html,
+  body,
+  #app {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    width: 100%;
+  }
+}
